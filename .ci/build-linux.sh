@@ -2,8 +2,6 @@
 
 cd rpcs3 || exit 1
 
-shellcheck .ci/*.sh
-
 git config --global --add safe.directory '*'
 
 # Pull all the submodules except some

@@ -1,0 +1,27 @@
+name: Lint CI Scripts
+
+on:
+  pull_request:
+    paths:
+      - '.ci/*.sh'
+  push:
+    branches:
+      - master
+    paths:
+      - '.ci/*.sh'
+  workflow_dispatch:
+
+concurrency:
+  group: lint-${{ github.ref }}-${{ github.event_name }}
+  cancel-in-progress: true
+
+jobs:
+  shellcheck:
+    name: ShellCheck .ci scripts
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@main
+
+      - name: Run shellcheck
+        run: shellcheck .ci/*.sh
