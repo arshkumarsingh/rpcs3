@@ -429,7 +429,7 @@ void spu_load_exec(const spu_exec_object& elf)
 		{
 			if (prog.p_vaddr >= SPU_LS_SIZE || prog.p_filesz > SPU_LS_SIZE - prog.p_vaddr)
 			{
-				spu_log.error("spu_load_exec: skipping segment with vaddr=0x%x filesz=0x%x (exceeds LS=0x%x)", prog.p_vaddr, prog.p_filesz, SPU_LS_SIZE);
+				spu_log.error("spu_load_exec: skipping segment with vaddr=0x%x filesz=0x%x (exceeds LS=0x%x)", prog.p_vaddr, prog.p_filesz, static_cast<u32>(SPU_LS_SIZE));
 				continue;
 			}
 
@@ -504,7 +504,7 @@ void spu_load_rel_exec(const spu_rel_object& elf)
 		{
 			if (offs >= SPU_LS_SIZE || shdr.sh_size > SPU_LS_SIZE - offs)
 			{
-				spu_log.error("spu_load_rel_exec: skipping section at offs=0x%x sh_size=0x%x (exceeds LS=0x%x)", offs, shdr.sh_size, SPU_LS_SIZE);
+				spu_log.error("spu_load_rel_exec: skipping section at offs=0x%x sh_size=0x%x (exceeds LS=0x%x)", offs, shdr.sh_size, static_cast<u32>(SPU_LS_SIZE));
 				break;
 			}
 
